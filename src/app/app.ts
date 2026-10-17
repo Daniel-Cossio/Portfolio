@@ -21,7 +21,7 @@ import { ContactComponent } from './components/contact';
     ContactComponent
   ],
   template: `
-    <div class="min-h-screen bg-white font-sans text-gray-900 selection:bg-emerald-200">
+    <div class="min-h-screen bg-white dark:bg-gray-950 font-sans text-gray-900 dark:text-gray-100 selection:bg-emerald-500/30 transition-colors duration-200">
       <app-navbar />
       <main>
         <app-hero />
