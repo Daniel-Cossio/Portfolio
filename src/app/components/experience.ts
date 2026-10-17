@@ -99,7 +99,7 @@ interface ExperienceItem {
 export class ExperienceComponent {
   experiences: ExperienceItem[] = [
     {
-      period: 'Oct 2023 – Present',
+      period: 'Dec 2023 – Present',
       role: 'Java Software Architect',
       company: 'Ceiba Software',
       location: 'Colombia',
@@ -114,7 +114,7 @@ export class ExperienceComponent {
       skills: ['Java 21', 'Spring Boot', 'Hexagonal Architecture', 'RabbitMQ', 'Angular', 'Kubernetes', 'Jenkins', 'SonarQube', 'Claude Code / SDD']
     },
     {
-      period: 'Jan 2022 – Oct 2023',
+      period: 'Jan 2022 – Nov 2023',
       role: 'RPA Developer Architect',
       company: 'Ceiba Software',
       location: 'Colombia',
