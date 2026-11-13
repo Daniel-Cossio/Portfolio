@@ -2,12 +2,12 @@
 
 [![Deploy to GitHub Pages](https://github.com/Daniel-Cossio/Portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/Daniel-Cossio/Portfolio/actions/workflows/deploy.yml)
 ![Angular](https://img.shields.io/badge/Angular-21.0-DD0031?style=flat&logo=angular&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.1-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
+[![dcss-ui](https://img.shields.io/badge/dcss--ui-Monochrome_Geist-121316?style=flat&logo=css3&logoColor=ededed)](https://github.com/Daniel-Cossio/dcss-ui)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat&logo=typescript&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
-[![Live Demo](https://img.shields.io/badge/Website-Live_on_GitHub_Pages-10B981?style=flat&logo=github)](https://daniel-cossio.github.io/Portfolio/)
+[![Live Demo](https://img.shields.io/badge/Website-Live_on_GitHub_Pages-ededed?style=flat&logo=github&logoColor=07080a)](https://daniel-cossio.github.io/Portfolio/)
 
-Personal portfolio web application of **Daniel Cossio** (Java Software Architect & Systems Engineer). Built with **Angular 21** and **Tailwind CSS v4**, configured for high-performance **Static Site Generation (SSG)** and automated deployment via **GitHub Actions** to **GitHub Pages**.
+Personal portfolio web application of **Daniel Cossio** (Java Software Architect & Systems Engineer). Built with **Angular 21** and **[dcss-ui](https://github.com/Daniel-Cossio/dcss-ui)** (Zero-Overhead, Raycast-inspired Design System with the **Monochrome** architectural palette), configured for high-performance **Static Site Generation (SSG)** and automated deployment via **GitHub Actions** to **GitHub Pages**.
 
 🔗 **Live Portfolio:** [https://daniel-cossio.github.io/Portfolio/](https://daniel-cossio.github.io/Portfolio/)
 
@@ -15,6 +15,8 @@ Personal portfolio web application of **Daniel Cossio** (Java Software Architect
 
 ## 🏛️ Architectural Highlights & Engineering Decisions
 
+* **Zero-Overhead Design System (`dcss-ui` — Monochrome Palette):** Styled 100% with [`dcss-ui`](https://github.com/Daniel-Cossio/dcss-ui) CSS design tokens (`--dcss-*`), Raycast-inspired obsidian surfaces (`#07080A` canvas, `#0D0E11` surface, `#121316` card), 1px hairline borders, zenital top highlights (`--dcss-top-highlight`), tactile 3D keycaps (`.dcss-kbd`), and the **Monochrome** (*Vercel Geist / Dieter Rams*) accent palette (`#EDEDED` dark / `#18181B` light)—eliminating Tailwind CSS and PostCSS completely.
+* **Dark-First & Instant Theme Switching:** Initializes with `data-theme="dark"` and `data-accent="monochrome"` via an anti-FOUC inline script in `index.html`, synchronized with `ThemeService` and `localStorage` (`dcss-theme` / `theme`).
 * **Static Site Generation (SSG):** Configured via Angular 21's static prerendering pipeline (`"outputMode": "static"`). Produces pre-rendered HTML and optimized client assets at build time, eliminating the need for an active Node.js server and keeping hosting costs at **$0 USD**.
 * **Modern Reactive Patterns:** Developed using Angular Standalone Components and native Angular Signals for performant, fine-grained state management.
 * **Anti-Scraping Email Obfuscation ("Click to Reveal"):** Protects personal contact channels (`danielcossio195+dev@gmail.com`) from automated web crawlers and spam harvesters through dynamic, client-side Signal assembly and clipboard integration.
@@ -28,8 +30,8 @@ Personal portfolio web application of **Daniel Cossio** (Java Software Architect
 | Layer | Technologies |
 | :--- | :--- |
 | **Framework** | Angular v21 (Standalone Components, Angular Signals) |
-| **Styling** | Tailwind CSS v4, PostCSS |
-| **UI Components & Icons**| Angular Material Icons (`@angular/material/icon`), Angular CDK |
+| **Design System & Styling** | [`dcss-ui`](https://github.com/Daniel-Cossio/dcss-ui) (`monochrome` palette, CSS Custom Properties, Zero Tailwind) |
+| **UI Components & Icons** | `dcss-ui` Primitives (`.dcss-card`, `.dcss-btn`, `.dcss-badge`, `.dcss-kbd`, `.dcss-action-bar`), Angular Material Icons (`@angular/material/icon`) |
 | **Rendering** | Static Site Generation (SSG) / Angular Prerender |
 | **CI/CD** | GitHub Actions (`actions/deploy-pages@v4`, `actions/configure-pages@v5`) |
 | **Hosting & CDN** | GitHub Pages (Free, global CDN, automated SSL/TLS) |
@@ -51,22 +53,25 @@ Portfolio/
 ├── src/
 │   ├── app/
 │   │   ├── components/
-│   │   │   ├── navbar.ts       # Responsive navigation header
-│   │   │   ├── hero.ts         # Hero section & core metrics overview
-│   │   │   ├── experience.ts   # Interactive career pathway & timeline
+│   │   │   ├── navbar.ts       # Glassmorphic sticky navbar & theme switcher
+│   │   │   ├── hero.ts         # Hero section, monochrome gradient & metrics
+│   │   │   ├── experience.ts   # Interactive career timeline & education
 │   │   │   ├── skills.ts       # Categorized competency grid
-│   │   │   ├── projects.ts     # Curated open-source GitHub projects
+│   │   │   ├── projects.ts     # Featured open-source projects (incl. dcss-ui)
 │   │   │   ├── cv.ts           # Dual-language resume download hub
-│   │   │   ├── contact.ts      # Anti-scraping contact & social links
-│   │   │   └── footer.ts       # Footer & copyright
+│   │   │   └── contact.ts      # Anti-scraping contact cards & footer
 │   │   ├── models/
 │   │   │   └── project.ts      # TypeScript interfaces
-│   │   ├── app.component.ts    # Root standalone layout component
+│   │   ├── services/
+│   │   │   └── theme.service.ts# Dark/Light theme & monochrome accent manager
+│   │   ├── app.ts              # Root standalone layout component
 │   │   └── app.config.ts       # Angular application configuration
-│   ├── index.html              # HTML shell
+│   ├── styles/
+│   │   └── dcss.css            # Bundled dcss-ui design system stylesheet
+│   ├── index.html              # HTML shell with anti-FOUC theme initialization
 │   ├── main.server.ts          # Server prerendering entry point
 │   ├── main.ts                 # Client bootstrap entry point
-│   └── styles.css              # Global styles & Tailwind CSS v4 directives
+│   └── styles.css              # Global imports, monochrome overrides & layouts
 ├── angular.json                # Angular CLI & SSG build configuration
 ├── package.json                # Dependencies and npm scripts
 └── tsconfig.json               # TypeScript compiler configuration
