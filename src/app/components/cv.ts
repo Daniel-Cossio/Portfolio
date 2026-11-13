@@ -7,29 +7,46 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [MatIconModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <section id="cv" class="py-20 bg-white dark:bg-gray-950 px-4 border-t border-gray-100 dark:border-gray-800 transition-colors duration-200">
-      <div class="max-w-4xl mx-auto text-center">
-        <span class="text-emerald-600 dark:text-emerald-400 font-mono text-sm font-semibold tracking-wider uppercase">Credentials</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mt-2 font-sans">Curriculum Vitae / Resume</h2>
-        <p class="text-gray-600 dark:text-gray-400 mt-3 mb-10 max-w-2xl mx-auto leading-relaxed">
-          Download my updated resume for an exhaustive overview of enterprise architectural experience, technology stack, and career milestones.
-        </p>
+    <section id="cv" class="portfolio-section">
+      <div class="dcss-container">
+        <article class="dcss-card portfolio-cv-card">
+          <div class="dcss-card-body">
+            <div class="portfolio-section-header" style="margin-bottom: var(--dcss-space-4);">
+              <span class="dcss-badge dcss-badge-primary dcss-badge-pill dcss-badge-mono">Credentials</span>
+              <h2 class="portfolio-section-title">Curriculum Vitae / Resume</h2>
+              <p class="portfolio-section-subtitle">
+                Download my updated resume for an exhaustive overview of enterprise architectural experience, technology stack, and career milestones.
+              </p>
+            </div>
 
-        <div class="flex flex-col sm:flex-row justify-center items-center gap-4 max-w-lg mx-auto">
-          <a href="assets/cv-en.pdf" target="_blank" rel="noopener noreferrer" download="Daniel_Cossio_Resume_EN.pdf"
-             class="inline-flex items-center gap-2.5 px-7 py-4 bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white font-semibold rounded-xl transition-all shadow-sm hover:shadow w-full sm:w-auto justify-center group">
-            <mat-icon class="text-xl">download</mat-icon>
-            <span>Download Resume (English)</span>
-          </a>
-          <a href="assets/cv-es.pdf" target="_blank" rel="noopener noreferrer" download="Daniel_Cossio_CV_ES.pdf"
-             class="inline-flex items-center gap-2.5 px-7 py-4 bg-gray-900 dark:bg-gray-800 text-white font-semibold rounded-xl hover:bg-gray-800 dark:hover:bg-gray-700 border border-transparent dark:border-gray-700 transition-all shadow-sm hover:shadow w-full sm:w-auto justify-center group">
-            <mat-icon class="text-xl">download</mat-icon>
-            <span>Descargar CV (Español)</span>
-          </a>
-        </div>
-        <p class="text-xs text-gray-400 dark:text-gray-500 mt-4 font-mono">
-          PDF format • Compiled with LuaLaTeX & moderncv
-        </p>
+            <div class="portfolio-cv-actions">
+              <a
+                href="assets/cv-en.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download="Daniel_Cossio_Resume_EN.pdf"
+                class="dcss-btn dcss-btn-primary dcss-btn-lg">
+                <mat-icon>download</mat-icon>
+                <span>Download Resume</span>
+                <kbd class="dcss-kbd dcss-kbd-sm">EN</kbd>
+              </a>
+              <a
+                href="assets/cv-es.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download="Daniel_Cossio_CV_ES.pdf"
+                class="dcss-btn dcss-btn-secondary dcss-btn-lg">
+                <mat-icon>download</mat-icon>
+                <span>Descargar CV</span>
+                <kbd class="dcss-kbd dcss-kbd-sm">ES</kbd>
+              </a>
+            </div>
+
+            <p class="portfolio-cv-meta">
+              PDF format • Compiled with LuaLaTeX &amp; moderncv
+            </p>
+          </div>
+        </article>
       </div>
     </section>
   `

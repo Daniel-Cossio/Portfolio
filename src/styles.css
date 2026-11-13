@@ -1,8 +1,489 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-@import "tailwindcss";
+@import "./styles/dcss.css";
 
-@custom-variant dark (&:where(.dark, .dark *));
+/* ==========================================================================
+   Monochrome Refinement Overrides for dcss-ui
+   ========================================================================== */
 
-html {
-  scroll-behavior: smooth;
+.dcss-badge-primary {
+  border-color: var(--dcss-border-highlight);
+}
+
+.dcss-badge-mono {
+  font-family: var(--dcss-font-mono);
+}
+
+[data-theme="light"] .dcss-kbd {
+  background: linear-gradient(to bottom, #ffffff, #f1f5f9);
+  border-color: var(--dcss-border-strong);
+  color: var(--dcss-text-secondary);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.dcss-btn-primary .dcss-kbd {
+  color: #e2e8f0;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="light"] .dcss-btn-primary .dcss-kbd {
+  background: linear-gradient(to bottom, #27272a, #18181b);
+  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+::selection {
+  background-color: var(--dcss-primary-subtle);
+  color: var(--dcss-text-primary);
+}
+
+mat-icon.mat-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  font-size: 1.125rem;
+  line-height: 1;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Portfolio Layout & Section Architecture (100% dcss-ui Tokens)
+   ========================================================================== */
+
+.portfolio-app {
+  min-height: 100vh;
+  background-color: var(--dcss-bg-base);
+  color: var(--dcss-text-body);
+  display: flex;
+  flex-direction: column;
+  transition: background-color var(--dcss-transition-normal),
+              color var(--dcss-transition-normal);
+}
+
+/* Sticky Glassmorphic Header */
+.portfolio-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--dcss-z-sticky);
+  background-color: var(--dcss-bg-surface-glass);
+  backdrop-filter: var(--dcss-glass-blur) var(--dcss-glass-saturate);
+  -webkit-backdrop-filter: var(--dcss-glass-blur) var(--dcss-glass-saturate);
+  border-bottom: 1px solid var(--dcss-border-default);
+}
+
+.portfolio-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+  gap: var(--dcss-space-4);
+}
+
+.portfolio-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--dcss-space-3);
+  color: var(--dcss-text-primary);
+  font-weight: var(--dcss-font-weight-bold);
+  font-size: var(--dcss-font-lg);
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.portfolio-brand:hover {
+  color: var(--dcss-text-primary);
+}
+
+.portfolio-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--dcss-radius-md);
+  background-color: var(--dcss-primary);
+  color: var(--dcss-primary-contrast);
+  border: 1px solid var(--dcss-border-highlight);
+  box-shadow: var(--dcss-top-highlight), var(--dcss-shadow-glow);
+  font-family: var(--dcss-font-mono);
+  font-size: var(--dcss-font-xs);
+  font-weight: var(--dcss-font-weight-bold);
+}
+
+.portfolio-nav-links {
+  display: none;
+  align-items: center;
+  gap: var(--dcss-space-6);
+}
+
+@media (min-width: 768px) {
+  .portfolio-nav-links {
+    display: flex;
+  }
+}
+
+.portfolio-nav-link {
+  font-size: var(--dcss-font-sm);
+  font-weight: var(--dcss-font-weight-medium);
+  color: var(--dcss-text-secondary);
+  text-decoration: none;
+  transition: color var(--dcss-transition-fast);
+}
+
+.portfolio-nav-link:hover {
+  color: var(--dcss-text-primary);
+}
+
+.portfolio-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--dcss-space-2);
+}
+
+/* Sections */
+.portfolio-section {
+  padding: 5rem 0;
+  position: relative;
+}
+
+.portfolio-section--surface {
+  background-color: var(--dcss-bg-surface);
+  border-top: 1px solid var(--dcss-border-default);
+  border-bottom: 1px solid var(--dcss-border-default);
+}
+
+.portfolio-section--top-border {
+  border-top: 1px solid var(--dcss-border-default);
+}
+
+.portfolio-section-header {
+  text-align: center;
+  max-width: 42rem;
+  margin: 0 auto var(--dcss-space-12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--dcss-space-3);
+}
+
+.portfolio-section-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+  font-weight: var(--dcss-font-weight-bold);
+  letter-spacing: -0.025em;
+  color: var(--dcss-text-primary);
+}
+
+.portfolio-section-subtitle {
+  font-size: var(--dcss-font-base);
+  color: var(--dcss-text-secondary);
+  line-height: var(--dcss-leading-relaxed);
+}
+
+/* Hero Section */
+.portfolio-hero {
+  padding: 5rem 0 4.5rem;
+  text-align: center;
+  background: radial-gradient(circle at 50% 12%, var(--dcss-primary-subtle) 0%, transparent 65%);
+}
+
+.portfolio-hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.25rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  color: var(--dcss-text-primary);
+  margin: var(--dcss-space-6) auto var(--dcss-space-5);
+}
+
+.portfolio-hero-accent {
+  background: linear-gradient(135deg, var(--dcss-text-primary) 0%, var(--dcss-primary) 50%, var(--dcss-text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.portfolio-hero-role {
+  font-family: var(--dcss-font-mono);
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-weight: var(--dcss-font-weight-medium);
+  color: var(--dcss-text-primary);
+  margin-bottom: var(--dcss-space-5);
+}
+
+.portfolio-hero-bio {
+  font-size: var(--dcss-font-lg);
+  color: var(--dcss-text-secondary);
+  max-width: 42rem;
+  margin: 0 auto var(--dcss-space-8);
+  line-height: var(--dcss-leading-relaxed);
+}
+
+.portfolio-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--dcss-space-3);
+  margin-bottom: var(--dcss-space-12);
+}
+
+.portfolio-metrics-grid {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding-top: var(--dcss-space-8);
+  border-top: 1px solid var(--dcss-border-subtle);
+}
+
+.portfolio-metric-value {
+  font-family: var(--dcss-font-mono);
+  font-size: var(--dcss-font-3xl);
+  font-weight: var(--dcss-font-weight-bold);
+  color: var(--dcss-text-primary);
+  line-height: var(--dcss-leading-tight);
+}
+
+.portfolio-metric-label {
+  font-size: var(--dcss-font-xs);
+  color: var(--dcss-text-secondary);
+  margin-top: var(--dcss-space-1);
+  font-weight: var(--dcss-font-weight-medium);
+}
+
+/* Experience Timeline */
+.portfolio-timeline {
+  position: relative;
+  border-left: 1px solid var(--dcss-border-highlight);
+  margin-left: var(--dcss-space-3);
+  padding-left: var(--dcss-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--dcss-space-8);
+}
+
+@media (min-width: 640px) {
+  .portfolio-timeline {
+    margin-left: var(--dcss-space-6);
+    padding-left: var(--dcss-space-8);
+  }
+}
+
+.portfolio-timeline-item {
+  position: relative;
+}
+
+.portfolio-timeline-node {
+  position: absolute;
+  left: calc(-1 * var(--dcss-space-6) - 6px);
+  top: 1.5rem;
+  width: 11px;
+  height: 11px;
+  border-radius: var(--dcss-radius-full);
+  background-color: var(--dcss-bg-base);
+  border: 2px solid var(--dcss-primary);
+  box-shadow: var(--dcss-shadow-glow);
+  transition: transform var(--dcss-transition-fast);
+}
+
+@media (min-width: 640px) {
+  .portfolio-timeline-node {
+    left: calc(-1 * var(--dcss-space-8) - 6px);
+  }
+}
+
+.portfolio-timeline-item:hover .portfolio-timeline-node {
+  transform: scale(1.25);
+}
+
+.portfolio-card-header-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dcss-space-1);
+}
+
+.portfolio-card-header-wrap {
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.portfolio-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--dcss-space-2);
+  font-size: var(--dcss-font-sm);
+  font-weight: var(--dcss-font-weight-medium);
+  color: var(--dcss-text-secondary);
+}
+
+.portfolio-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--dcss-space-2);
+}
+
+.portfolio-bullet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--dcss-space-2);
+  color: var(--dcss-text-secondary);
+  font-size: var(--dcss-font-sm);
+  line-height: var(--dcss-leading-relaxed);
+}
+
+.portfolio-bullet-marker {
+  color: var(--dcss-primary);
+  font-family: var(--dcss-font-mono);
+  font-size: var(--dcss-font-xs);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.portfolio-card-footer-start {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: var(--dcss-space-2);
+}
+
+.portfolio-education-block {
+  margin-top: var(--dcss-space-12);
+  padding-top: var(--dcss-space-10);
+  border-top: 1px solid var(--dcss-border-subtle);
+}
+
+.portfolio-education-card {
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+/* Skills & Contact Icon Box */
+.portfolio-icon-box {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--dcss-radius-md);
+  background-color: var(--dcss-bg-elevated);
+  border: 1px solid var(--dcss-border-default);
+  box-shadow: var(--dcss-top-highlight);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dcss-primary);
+  flex-shrink: 0;
+  transition: background-color var(--dcss-transition-fast),
+              color var(--dcss-transition-fast),
+              border-color var(--dcss-transition-fast);
+}
+
+.portfolio-skill-subtitle {
+  font-size: var(--dcss-font-xs);
+  font-weight: var(--dcss-font-weight-normal);
+  color: var(--dcss-text-muted);
+  margin-top: 2px;
+}
+
+/* Projects */
+.portfolio-project-title {
+  font-size: var(--dcss-font-xl);
+  font-weight: var(--dcss-font-weight-bold);
+  color: var(--dcss-text-primary);
+  margin-bottom: var(--dcss-space-3);
+}
+
+.portfolio-project-desc {
+  color: var(--dcss-text-secondary);
+  font-size: var(--dcss-font-sm);
+  line-height: var(--dcss-leading-relaxed);
+  margin-bottom: var(--dcss-space-5);
+}
+
+.portfolio-projects-cta {
+  text-align: center;
+  margin-top: var(--dcss-space-10);
+}
+
+/* CV Card */
+.portfolio-cv-card {
+  max-width: 46rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.portfolio-cv-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--dcss-space-4);
+  margin-top: var(--dcss-space-6);
+}
+
+.portfolio-cv-meta {
+  font-family: var(--dcss-font-mono);
+  font-size: var(--dcss-font-xs);
+  color: var(--dcss-text-muted);
+  margin-top: var(--dcss-space-4);
+}
+
+/* Contact Cards & Footer */
+.portfolio-contact-grid {
+  max-width: 52rem;
+  margin: 0 auto;
+}
+
+.portfolio-contact-card {
+  text-align: center;
+  align-items: center;
+  padding: var(--dcss-space-6);
+  gap: var(--dcss-space-2);
+  text-decoration: none;
+  width: 100%;
+  cursor: pointer;
+}
+
+.portfolio-contact-card:hover .portfolio-icon-box {
+  background-color: var(--dcss-primary);
+  color: var(--dcss-primary-contrast);
+  border-color: var(--dcss-border-highlight);
+}
+
+.portfolio-contact-title {
+  font-size: var(--dcss-font-base);
+  font-weight: var(--dcss-font-weight-semibold);
+  color: var(--dcss-text-primary);
+  margin-top: var(--dcss-space-1);
+}
+
+.portfolio-contact-handle {
+  font-family: var(--dcss-font-mono);
+  font-size: var(--dcss-font-xs);
+  color: var(--dcss-text-muted);
+  word-break: break-all;
+}
+
+.portfolio-contact-hint {
+  font-family: var(--dcss-font-mono);
+  font-size: 0.6875rem;
+  color: var(--dcss-text-secondary);
+}
+
+.portfolio-footer {
+  margin-top: var(--dcss-space-12);
+  padding-top: var(--dcss-space-6);
+  border-top: 1px solid var(--dcss-border-subtle);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--dcss-space-4);
+  font-size: var(--dcss-font-xs);
+  color: var(--dcss-text-muted);
+}
+
+.portfolio-footer-meta {
+  font-family: var(--dcss-font-mono);
+  color: var(--dcss-text-secondary);
 }

@@ -11,9 +11,12 @@ export class ThemeService {
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
       try {
-        const isDarkActive = document.documentElement.classList.contains('dark');
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const isDarkActive = currentTheme !== 'light';
         this.isDark.set(isDarkActive);
-      } catch (_) {
+        document.documentElement.setAttribute('data-theme', isDarkActive ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-accent', 'monochrome');
+      } catch {
         this.isDark.set(true);
       }
     }
@@ -24,14 +27,14 @@ export class ThemeService {
     this.isDark.set(next);
     if (isPlatformBrowser(this.platformId)) {
       try {
-        if (next) {
-          document.documentElement.classList.add('dark');
-          localStorage.setItem('theme', 'dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-          localStorage.setItem('theme', 'light');
-        }
-      } catch (_) {}
+        const nextTheme = next ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', nextTheme);
+        document.documentElement.setAttribute('data-accent', 'monochrome');
+        localStorage.setItem('dcss-theme', nextTheme);
+        localStorage.setItem('theme', nextTheme);
+      } catch {
+        // Ignore storage restrictions in private contexts
+      }
     }
   }
 }

@@ -17,80 +17,87 @@ interface ExperienceItem {
   imports: [MatIconModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <section id="experience" class="py-20 px-4 bg-gray-50/60 dark:bg-gray-900/40 border-y border-gray-100 dark:border-gray-800 transition-colors duration-200">
-      <div class="max-w-5xl mx-auto">
-        <div class="text-center mb-16">
-          <span class="text-emerald-600 dark:text-emerald-400 font-mono text-sm font-semibold tracking-wider uppercase">Career Pathway</span>
-          <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mt-2 font-sans">Professional Experience</h2>
-          <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-3">
+    <section id="experience" class="portfolio-section portfolio-section--surface">
+      <div class="dcss-container">
+        <div class="portfolio-section-header">
+          <span class="dcss-badge dcss-badge-primary dcss-badge-pill dcss-badge-mono">Career Pathway</span>
+          <h2 class="portfolio-section-title">Professional Experience</h2>
+          <p class="portfolio-section-subtitle">
             Delivering business value through resilient system architecture, automated operations, and engineering leadership.
           </p>
         </div>
 
-        <div class="relative border-l-2 border-emerald-500/30 ml-4 sm:ml-8 space-y-12">
+        <div class="portfolio-timeline">
           @for (item of experiences; track item.role + item.period) {
-            <div class="relative pl-6 sm:pl-10 group">
-              <!-- Timeline node indicator -->
-              <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-white dark:bg-gray-950 border-2 border-emerald-600 group-hover:scale-125 transition-transform"></span>
+            <div class="portfolio-timeline-item">
+              <span class="portfolio-timeline-node" aria-hidden="true"></span>
 
-              <div class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-xs border border-gray-100 dark:border-gray-800 hover:shadow-md dark:hover:border-emerald-500/40 transition-all">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                  <div>
-                    <span class="inline-block px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-emerald-50 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 mb-2">
-                      {{ item.period }}
-                    </span>
-                    <h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">{{ item.role }}</h3>
-                    <div class="text-gray-600 dark:text-gray-400 font-medium text-sm flex items-center gap-1.5 mt-0.5">
-                      <mat-icon class="text-base w-4 h-4 text-gray-400 dark:text-gray-500">business</mat-icon>
+              <article class="dcss-card dcss-card-interactive">
+                <div class="dcss-card-header portfolio-card-header-wrap">
+                  <div class="portfolio-card-header-stack">
+                    <h3>{{ item.role }}</h3>
+                    <div class="portfolio-meta-row">
+                      <mat-icon>business</mat-icon>
                       <span>{{ item.company }}</span>
                       <span>•</span>
-                      <span class="text-gray-500 dark:text-gray-400">{{ item.location }}</span>
+                      <span>{{ item.location }}</span>
                     </div>
                   </div>
+                  <span class="dcss-badge dcss-badge-primary dcss-badge-pill dcss-badge-mono">
+                    {{ item.period }}
+                  </span>
                 </div>
 
-                <ul class="space-y-2.5 mb-6 text-gray-600 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
-                  @for (bullet of item.bullets; track bullet) {
-                    <li class="flex items-start gap-2">
-                      <span class="text-emerald-500 mt-1 font-bold text-xs">▹</span>
-                      <span>{{ bullet }}</span>
-                    </li>
-                  }
-                </ul>
+                <div class="dcss-card-body">
+                  <ul class="portfolio-bullet-list">
+                    @for (bullet of item.bullets; track bullet) {
+                      <li class="portfolio-bullet-item">
+                        <span class="portfolio-bullet-marker">▹</span>
+                        <span>{{ bullet }}</span>
+                      </li>
+                    }
+                  </ul>
+                </div>
 
-                <div class="flex flex-wrap gap-2 pt-4 border-t border-gray-50 dark:border-gray-800">
+                <div class="dcss-card-footer portfolio-card-footer-start">
                   @for (skill of item.skills; track skill) {
-                    <span class="px-2.5 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs font-mono font-medium rounded-md border border-transparent dark:border-gray-700/60">
+                    <span class="dcss-badge dcss-badge-neutral dcss-badge-mono">
                       {{ skill }}
                     </span>
                   }
                 </div>
-              </div>
+              </article>
             </div>
           }
         </div>
 
         <!-- Education Card -->
-        <div class="mt-16 pt-12 border-t border-gray-200 dark:border-gray-800">
-          <div class="text-center mb-8">
-            <span class="text-emerald-600 dark:text-emerald-400 font-mono text-sm font-semibold tracking-wider uppercase">Academic Background</span>
-            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mt-1">Education</h3>
+        <div class="portfolio-education-block">
+          <div class="portfolio-section-header">
+            <span class="dcss-badge dcss-badge-primary dcss-badge-pill dcss-badge-mono">Academic Background</span>
+            <h3 class="portfolio-section-title">Education</h3>
           </div>
 
-          <div class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-xs border border-gray-100 dark:border-gray-800 max-w-3xl mx-auto">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-              <div>
-                <span class="inline-block px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-emerald-50 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 mb-1">
-                  2017 – 2025
-                </span>
-                <h4 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">B.Sc. in Systems Engineering (Ingeniería de Sistemas)</h4>
-                <p class="text-emerald-700 dark:text-emerald-400 font-medium text-sm">Universidad del Valle, Colombia</p>
+          <article class="dcss-card dcss-card-interactive portfolio-education-card">
+            <div class="dcss-card-header portfolio-card-header-wrap">
+              <div class="portfolio-card-header-stack">
+                <h4>B.Sc. in Systems Engineering (Ingeniería de Sistemas)</h4>
+                <div class="portfolio-meta-row">
+                  <mat-icon>school</mat-icon>
+                  <span>Universidad del Valle, Colombia</span>
+                </div>
               </div>
+              <span class="dcss-badge dcss-badge-primary dcss-badge-pill dcss-badge-mono">
+                2017 – 2025
+              </span>
             </div>
-            <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mt-2">
-              <strong class="text-gray-900 dark:text-white">Undergraduate Thesis:</strong> "Development of a support tool for learning soft skills." Core coursework in distributed systems, software architecture, relational data modeling, and web engineering.
-            </p>
-          </div>
+            <div class="dcss-card-body">
+              <p>
+                <strong>Undergraduate Thesis:</strong> "Development of a support tool for learning soft skills."
+                Core coursework in distributed systems, software architecture, relational data modeling, and web engineering.
+              </p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
